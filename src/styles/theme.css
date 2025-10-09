@@ -1,0 +1,119 @@
+:root{
+  --bg-start:#053941; --bg-end:#79e3cf;
+  --panel:#0c2f34cc; --panel-solid:#0c2f34;
+  --card:#0f3f46; --card-muted:#0d383e;
+  --text:#e9fbf6; --text-dim:#bfe9e1;
+  --accent:#ff914d; --accent-strong:#ff7a26;
+  --chip-green:#25d19f; --chip-red:#ff5c5c; --chip-gray:#6e9da0;
+  --radius:16px; --radius-lg:20px;
+  --shadow:0 8px 24px rgba(0,0,0,.24); --shadow-soft:0 4px 12px rgba(0,0,0,.18);
+  --space-1:6px; --space-2:10px; --space-3:14px; --space-4:18px; --space-5:24px; --space-6:32px;
+  --sidebar-w:280px; --header-h:68px;
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans";
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0; font-family:var(--font); color:var(--text);
+  background:linear-gradient(168deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  background-attachment: fixed;
+}
+
+/* ==== Shell (no bottom action bar) ==== */
+.app-shell{
+  display:grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  grid-template-rows: var(--header-h) 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main";
+  min-height:100vh;
+}
+
+/* Sidebar */
+.sidebar{
+  grid-area:sidebar; backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(12,47,52,.72), rgba(12,47,52,.38));
+  border-right:1px solid rgba(255,255,255,.08);
+  padding: var(--space-5) var(--space-4); position:sticky; top:0; height:100vh;
+}
+.sidebar .brand{display:flex; align-items:center; gap:10px; margin-bottom: var(--space-5); font-weight:700; letter-spacing:.2px}
+.sidebar .brand .logo{
+  height:36px; width:36px; border-radius:12px;
+  background: radial-gradient(100% 100% at 30% 20%, var(--accent) 0%, var(--accent-strong) 60%, #b64a13 100%);
+  box-shadow: var(--shadow-soft);
+}
+.nav{display:flex; flex-direction:column; gap:6px}
+.nav a{display:flex; align-items:center; gap:12px; padding:10px 12px; color:var(--text-dim); text-decoration:none; border-radius:12px}
+.nav a .icon{width:24px; height:24px; display:grid; place-items:center; background:rgba(255,255,255,.06); border-radius:8px}
+.nav a.active, .nav a:hover{color:var(--text); background:rgba(255,255,255,.08); box-shadow: var(--shadow-soft)}
+
+/* Header (now holds Quick Actions) */
+.header{
+  grid-area:header; display:flex; align-items:center; justify-content:space-between;
+  padding: 0 var(--space-5); backdrop-filter: blur(10px);
+  background: linear-gradient(90deg, rgba(12,47,52,.72), rgba(12,47,52,.35));
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.header .left,.header .right{display:flex; align-items:center; gap:12px}
+.header .title{font-weight:700; letter-spacing:.2px}
+.search{
+  display:flex; align-items:center; gap:10px; padding:10px 14px; min-width:340px;
+  border-radius:14px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); color:var(--text-dim);
+}
+.search input{flex:1; background:transparent; border:0; outline:none; color:var(--text)}
+
+/* Main content */
+.main{grid-area:main; padding: var(--space-6); max-width: 1400px; width:100%; margin: 0 auto}
+
+/* Segmented tabs */
+.segmented{
+  display:flex; gap:8px; padding:4px; border-radius:999px; width:max-content;
+  background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08);
+}
+.segmented .tab{padding:10px 16px; border-radius:999px; color:var(--text-dim); background:transparent; border:0; cursor:pointer; font-weight:600}
+.segmented .tab.active{color:#0b2e32; background: var(--accent); box-shadow: var(--shadow)}
+
+/* Cards */
+.card-list{display:flex; flex-direction:column; gap:14px; margin-top:18px}
+.card{
+  background: linear-gradient(180deg, var(--card), var(--card-muted));
+  border:1px solid rgba(255,255,255,.06); border-radius: var(--radius-lg);
+  padding:16px 18px; box-shadow: var(--shadow-soft);
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+}
+.card .meta{display:flex; align-items:center; gap:14px}
+.card .title{font-weight:700}
+.card .sub{color:var(--text-dim); font-size:.92rem}
+
+/* Chips */
+.chip{padding:6px 10px; border-radius:999px; font-weight:700; font-size:.78rem; letter-spacing:.2px}
+.chip.paid{ background: rgba(37,209,159,.18); color:var(--chip-green); border:1px solid rgba(37,209,159,.35)}
+.chip.overdue{ background: rgba(255,92,92,.14); color:var(--chip-red); border:1px solid rgba(255,255,255,.35)}
+.chip.pending{ background: rgba(110,157,160,.14); color:var(--chip-gray); border:1px solid rgba(110,157,160,.35)}
+
+/* Buttons */
+.primary-btn{
+  display:inline-flex; align-items:center; gap:10px; background: var(--accent); color:#0b2e32; border:0; cursor:pointer;
+  padding: 10px 14px; border-radius: 12px; font-weight:800; letter-spacing:.3px; box-shadow: var(--shadow);
+}
+.primary-btn:active{transform:translateY(1px)}
+
+/* Utils */
+.row{display:flex; align-items:center; gap:12px}
+.spread{display:flex; align-items:center; justify-content:space-between}
+.dim{color:var(--text-dim)}
+.hr{height:1px; background:rgba(255,255,255,.08); margin:10px 0; border:0}
+
+/* Responsive */
+@media (max-width:1100px){ :root{ --sidebar-w:92px } .nav a span.label{display:none} }
+@media (max-width:780px){
+  .app-shell{
+    grid-template-columns:1fr;
+    grid-template-rows: var(--header-h) 1fr;         /* no action bar row */
+    grid-template-areas: "header" "main";
+  }
+  .sidebar{display:none}
+  .search{min-width:0; width:min(56vw,340px)}
+  .main{padding:var(--space-5)}
+}
