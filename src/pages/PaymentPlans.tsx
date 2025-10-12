@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { usePlans } from "../hooks/usePlans";
 
 type Frequency = "weekly" | "biweekly" | "monthly";
 type Mode = "amount" | "count";
@@ -19,6 +20,7 @@ type PlanInput = {
 type Installment = { dueDate: string; amount: number };
 
 const APP_FEE_RATE = 0.025;
+const { loading, error, plans, refresh } = usePlans();
 const EST_PROCESSOR_RATE = 0.029;
 const EST_PROCESSOR_FIXED = 0.30;
 
@@ -26,6 +28,18 @@ const EST_PROCESSOR_FIXED = 0.30;
 const API_BASE = "/api";
 // Dev-only user id until auth is added
 const DEV_USER_ID = "user_dev_1";
+
+{/* TEMP: remove after verify */}
+<div style={{marginBottom: 16}}>
+  {loading && <div>Loading plans…</div>}
+  {error && <div style={{color: "salmon"}}>Error: {error}</div>}
+  {!loading && !error && (
+    <div style={{fontSize: 12, opacity: 0.7}}>
+      {plans.length} plan{plans.length === 1 ? "" : "s"} loaded
+      <button onClick={refresh} style={{marginLeft: 8}}>Refresh</button>
+    </div>
+  )}
+</div>
 
 export default function PaymentPlans() {
   const [form, setForm] = useState<PlanInput>({
