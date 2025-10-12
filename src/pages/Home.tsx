@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DebtCard, { Debt } from "../components/DebtCard";
 import { useEffect } from "react";
-import { api } from "../../lib/api";
+import { api } from "../lib/api";
 
 export default function Home() {
   const tabs = [
