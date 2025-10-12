@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import DebtCard, { Debt } from "../components/DebtCard";
+import { useEffect } from "react";
+import { api } from "../../lib/api";
 
 export default function Home() {
   const tabs = [
@@ -24,6 +26,18 @@ export default function Home() {
   debts.all = [...debts.toMe, ...debts.iOwe];
 
   const list = debts[activeTab] ?? [];
+  useEffect(() => {
+  (async () => {
+    try {
+      const r = await api("/health");
+      console.log("API /health status:", r.status);
+      const txt = await r.text().catch(() => "(no body)");
+      console.log("API /health body:", txt);
+    } catch (e) {
+      console.error("API /health error:", e);
+    }
+  })();
+}, []);
 
   return (
     <>
