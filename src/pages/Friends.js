@@ -1,0 +1,4 @@
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+export default function Friends() {
+    return (_jsxs(_Fragment, { children: [_jsxs("div", { className: "segmented", children: [_jsx("button", { className: "tab active", children: "All Friends" }), _jsx("button", { className: "tab", children: "Invites" })] }), _jsx("div", { className: "card-list", children: _jsxs("div", { className: "card", children: [_jsxs("div", { className: "meta", children: [_jsx("div", { className: "avatar", style: { width: 36, height: 36, borderRadius: 12, background: "linear-gradient(180deg,#79e3cf,#3fbfa9)" } }), _jsxs("div", { children: [_jsx("div", { className: "title", children: "Jordan M." }), _jsx("div", { className: "sub", children: "Owes you $40 \u2022 2 open items" })] })] }), _jsx("button", { className: "primary-btn", children: "Message" })] }) })] }));
+}

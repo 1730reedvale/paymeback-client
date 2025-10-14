@@ -1,0 +1,4 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+export default function Settings() {
+    return (_jsxs("div", { className: "card-list", children: [_jsxs("div", { className: "card", children: [_jsxs("div", { children: [_jsx("div", { className: "title", children: "Theme" }), _jsx("div", { className: "sub", children: "Dark teal / mint (locked)" })] }), _jsx("button", { className: "primary-btn", onClick: () => alert("Themes coming soon"), children: "Change" })] }), _jsxs("div", { className: "card", children: [_jsxs("div", { children: [_jsx("div", { className: "title", children: "Notifications" }), _jsx("div", { className: "sub", children: "Push + Email" })] }), _jsx("button", { className: "primary-btn", onClick: () => alert("Notification settings"), children: "Edit" })] })] }));
+}

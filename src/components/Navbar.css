@@ -1,0 +1,101 @@
+/* ===========================
+   PayMeBack Sidebar Styling
+   Locked for dark gradient UI
+   =========================== */
+
+.sidebar {
+  position: sticky;
+  top: var(--space-6);
+  align-self: start;
+  background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+  border: var(--card-ring);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-glow);
+  padding: var(--space-5) var(--space-4);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar .logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text-0);
+  margin-bottom: var(--space-5);
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  color: var(--text-1);
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, color 0.15s ease, border 0.15s ease;
+}
+
+.nav-item:hover {
+  background: rgba(43, 107, 255, 0.08);
+  color: var(--text-0);
+  border-color: rgba(43, 107, 255, 0.25);
+}
+
+.nav-item.active {
+  background: linear-gradient(
+    180deg,
+    rgba(43, 107, 255, 0.15),
+    rgba(111, 66, 193, 0.12)
+  );
+  color: var(--text-0);
+  border-color: rgba(111, 66, 193, 0.25);
+}
+
+.nav-item span:last-child {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.nav-item .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--accent);
+  font-size: 16px;
+}
+
+/* Create button */
+.sidebar .btn {
+  margin-top: var(--space-5);
+  text-align: center;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+  color: white;
+  padding: 12px 0;
+  box-shadow: 0 6px 18px rgba(43, 107, 255, 0.25);
+  border: none;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.sidebar .btn:hover {
+  filter: brightness(1.1);
+}
+.sidebar .btn:active {
+  transform: translateY(1px);
+  filter: brightness(0.96);
+}
