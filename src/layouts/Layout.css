@@ -1,0 +1,4 @@
+/* layout shell (safe defaults) */
+.pm-app-shell { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+.pm-sidebar   { background: transparent; }
+.pm-main      { overflow: auto; padding: 0; }
