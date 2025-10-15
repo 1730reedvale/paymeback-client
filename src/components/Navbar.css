@@ -1,101 +1,72 @@
-/* ===========================
-   PayMeBack Sidebar Styling
-   Locked for dark gradient UI
-   =========================== */
 
-.sidebar {
-  position: sticky;
-  top: var(--space-6);
-  align-self: start;
-  background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
-  border: var(--card-ring);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--card-glow);
-  padding: var(--space-5) var(--space-4);
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+// src/components/NavBar.js
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
-.sidebar .logo {
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: var(--text-0);
-  margin-bottom: var(--space-5);
-}
+const items = [
+  { to: "/", label: "Home" },
+  { to: "/plans", label: "Plans" },
+  { to: "/payment-plans", label: "Payment Plans" },
+  { to: "/debts", label: "Debts" },
+  { to: "/history", label: "History" },
+  { to: "/friends", label: "Friends" },
+  { to: "/payment-method", label: "Payment Method" },
+  { to: "/settings", label: "Profile" },
+];
 
-.sidebar nav {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
+export default function NavBar() {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  color: var(--text-1);
-  border-radius: 12px;
-  border: 1px solid transparent;
-  transition: background 0.15s ease, color 0.15s ease, border 0.15s ease;
-}
+  // If the brand/whole sidebar is accidentally wrapped in <a href="/">,
+  // cancel that navigation when clicking inside the navbar.
+  const stopOuterLink = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
-.nav-item:hover {
-  background: rgba(43, 107, 255, 0.08);
-  color: var(--text-0);
-  border-color: rgba(43, 107, 255, 0.25);
-}
+  const go = (to) => (e) => {
+    // cancel any outer anchor default + bubbling
+    e.preventDefault();
+    e.stopPropagation();
+    if (to !== pathname) navigate(to);
+  };
 
-.nav-item.active {
-  background: linear-gradient(
-    180deg,
-    rgba(43, 107, 255, 0.15),
-    rgba(111, 66, 193, 0.12)
+  return (
+    <nav className="pm-navbar" onClick={stopOuterLink} onMouseDown={stopOuterLink}>
+      <div
+        className="pm-navbar__brand"
+        role="button"
+        tabIndex={0}
+        onClick={stopOuterLink}
+        onMouseDown={stopOuterLink}
+      >
+        <span className="pm-navbar__logo">PayMeBack</span>
+      </div>
+
+      <ul className="pm-navbar__list">
+        {items.map((it) => {
+          const active = pathname === it.to || (it.to !== "/" && pathname.startsWith(it.to));
+          return (
+            <li key={it.to} className={"pm-navbar__item" + (active ? " pm-navbar__item--active" : "")}>
+              {/* Use a button-like div so there’s no nested <a> */}
+              <div
+                role="link"
+                tabIndex={0}
+                className={"pm-navbar__link" + (active ? " pm-navbar__link--active" : "")}
+                onClick={go(it.to)}
+                onMouseDown={stopOuterLink}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") go(it.to)(e);
+                }}
+              >
+                {it.label}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
-  color: var(--text-0);
-  border-color: rgba(111, 66, 193, 0.25);
-}
-
-.nav-item span:last-child {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.nav-item .icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--accent);
-  font-size: 16px;
-}
-
-/* Create button */
-.sidebar .btn {
-  margin-top: var(--space-5);
-  text-align: center;
-  width: 100%;
-  font-size: 15px;
-  font-weight: 700;
-  border-radius: 12px;
-  background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-  color: white;
-  padding: 12px 0;
-  box-shadow: 0 6px 18px rgba(43, 107, 255, 0.25);
-  border: none;
-  transition: transform 0.12s ease, filter 0.12s ease;
-}
-.sidebar .btn:hover {
-  filter: brightness(1.1);
-}
-.sidebar .btn:active {
-  transform: translateY(1px);
-  filter: brightness(0.96);
 }
