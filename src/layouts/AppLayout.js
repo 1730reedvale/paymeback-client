@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Outlet } from "react-router-dom";
-import NavBar from "../components/NavBar/NavBar.js";
+import NavBar from "../components/NavBar.js";
 import "./Layout.css"; // optional; ignore if you don't have it
 /**
  * A clean layout that does NOT wrap anything in <a href="/"> and
