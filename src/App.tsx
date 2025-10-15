@@ -1,21 +1,45 @@
-// /src/App.tsx
+// src/App.tsx
+// @ts-nocheck
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import "./styles/theme.css";
-import Layout from "./layouts/Layout";
+
+// ✅ NEW Home
 import HomePage from "./home/HomePage";
 
-export default function App(): JSX.Element {
-  return (
-    <Routes>
-      <Route element={<Layout />}>
-        {/* Default dashboard */}
-        <Route index element={<HomePage />} />
-        <Route path="/home" element={<HomePage />} />
-      </Route>
+// ✅ Existing JS pages (we’ll use them as-is)
+import Plans from "./pages/Plans.js";
+import PaymentPlans from "./pages/PaymentPlans.js";
+import Debts from "./pages/Debts.js";
+import History from "./pages/History.js";
+import Friends from "./pages/Friends.js";
+import Settings from "./pages/Settings.js";
+import PaymentMethod from "./pages/PaymentMethod.js";
 
-      {/* Fallback */}
-      <Route path="*" element={<Navigate to="/home" replace />} />
+// Optional layouts if you’re using one (safe to ignore if unused)
+// import AppLayout from "./layouts/AppLayout.js";
+
+export default function App() {
+  return (
+    // If you use a layout, wrap Routes with it:
+    // <AppLayout>
+    <Routes>
+      {/* Home */}
+      <Route index element={<HomePage />} />
+      <Route path="/home" element={<HomePage />} />
+
+      {/* Primary sections */}
+      <Route path="/plans" element={<Plans />} />
+      <Route path="/payment-plans" element={<PaymentPlans />} />
+      <Route path="/debts" element={<Debts />} />
+      <Route path="/history" element={<History />} />
+      <Route path="/friends" element={<Friends />} />
+      <Route path="/settings" element={<Settings />} />
+      <Route path="/payment-method" element={<PaymentMethod />} />
+
+      {/* Fallbacks */}
+      <Route path="/index.html" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    // </AppLayout>
   );
 }
