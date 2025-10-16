@@ -153,12 +153,35 @@ function Sidebar() {
   );
 }
 
+function getAuthUser() {
+  try {
+    const auth = window?.firebaseAuth || window?.auth;
+    const user = auth?.currentUser;
+    if (user) {
+      return (
+        user.displayName ||
+        user.email ||
+        user.phoneNumber ||
+        localStorage.getItem("pm_userName") ||
+        "You"
+      );
+    }
+  } catch (_) {}
+  return localStorage.getItem("pm_userName") || "You";
+}
+
+async function doLogout(navigate) {
+  try {
+    const auth = window?.firebaseAuth || window?.auth;
+    if (auth?.signOut) await auth.signOut();
+  } catch (_) {}
+  localStorage.removeItem("pm_userName");
+  navigate("/home");
+}
+
 export default function AppLayout({ children }) {
-  const userName =
-    (typeof window !== "undefined" &&
-      (localStorage.getItem("pm_userName") || "You")) ||
-    "You";
   const navigate = useNavigate();
+  const userName = getAuthUser();
 
   return (
     <div style={S.shell}>
@@ -170,15 +193,8 @@ export default function AppLayout({ children }) {
             <button style={S.btn} onClick={() => navigate("/plans")}>
               + Create IOU
             </button>
-            <div style={{ opacity: 0.85 }}>{userName}</div>
-            <button
-              style={S.ghost}
-              onClick={() => {
-                // placeholder: wire to your Auth logout when ready
-                localStorage.removeItem("pm_userName");
-                navigate("/home");
-              }}
-            >
+            <div style={{ opacity: 0.9 }}>{userName}</div>
+            <button style={S.ghost} onClick={() => doLogout(navigate)}>
               Logout
             </button>
           </div>
