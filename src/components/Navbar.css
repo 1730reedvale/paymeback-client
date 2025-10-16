@@ -1,7 +1,12 @@
+
 /* src/components/Navbar.css */
 
-/* Sidebar shell */
+/* Let the sidebar inherit the app's font + smoothing */
 .pm-navbar {
+  font-family: inherit;            /* ← match app font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -14,12 +19,12 @@
 
 /* Brand */
 .pm-navbar__brand {
-  font-weight: 700;
+  font-weight: 800;                /* bolder to match hero */
   font-size: 18px;
-  letter-spacing: 0.4px;
-  color: #fff;
-  opacity: 0.9;
-  margin-bottom: 8px;
+  letter-spacing: 0.3px;           /* subtle tracking like the rest of UI */
+  color: #ffffff;
+  opacity: 0.92;
+  margin-bottom: 12px;
   cursor: default;
 }
 
@@ -32,38 +37,41 @@
   gap: 6px;
 }
 
-/* Item + link */
-.pm-navbar__item { }
+/* Items / links */
+.pm-navbar__item {}
 
 .pm-navbar__link {
+  text-decoration: none;
+  font-family: inherit;            /* ensure consistency */
+  font-weight: 600;                /* same weight as metric labels */
+  letter-spacing: 0.2px;
+  color: rgba(255,255,255,0.82);
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 10px 12px;
   border-radius: 10px;
-  color: rgba(255,255,255,0.8);
-  text-decoration: none;
-  font-weight: 500;
   transition: background 160ms ease, color 160ms ease, transform 120ms ease;
 }
 
 .pm-navbar__link:hover {
-  background: rgba(255,255,255,0.06);
-  color: #fff;
+  background: rgba(255,255,255,0.07);
+  color: #ffffff;
   transform: translateX(2px);
 }
 
 .pm-navbar__link--active {
-  background: linear-gradient(90deg, rgba(98,0,234,0.24), rgba(0,184,255,0.24));
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.12);
+  color: #ffffff;
+  background: radial-gradient(120% 120% at 0% 0%, rgba(132,94,247,0.25) 0%, rgba(0,184,255,0.20) 60%, rgba(0,0,0,0) 100%);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset, 0 6px 18px rgba(0,0,0,0.35);
 }
 
-/* Optional thin divider under brand */
+/* Divider under brand */
 .pm-navbar::after {
   content: "";
   display: block;
   height: 1px;
-  margin: 8px 0 6px 0;
+  margin: 10px 0 6px 0;
   background: linear-gradient(90deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02));
 }
