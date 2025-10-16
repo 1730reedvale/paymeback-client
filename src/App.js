@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Routes, Route, Navigate } from "react-router-dom";
 // SAFE layout (no anchor wrappers, no click-to-home)
-import AppLayout from "./layouts/AppLayout.js";
+import AppLayout from "./layouts/AppLayout.jsx";
 // New Home
 import HomePage from "./home/HomePage";
 // Existing pages
