@@ -1,72 +1,69 @@
+/* src/components/Navbar.css */
 
-// src/components/NavBar.js
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import "./Navbar.css";
+/* Sidebar shell */
+.pm-navbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 16px;
+  width: 240px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0b1020 0%, #0a1226 100%);
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
 
-const items = [
-  { to: "/", label: "Home" },
-  { to: "/plans", label: "Plans" },
-  { to: "/payment-plans", label: "Payment Plans" },
-  { to: "/debts", label: "Debts" },
-  { to: "/history", label: "History" },
-  { to: "/friends", label: "Friends" },
-  { to: "/payment-method", label: "Payment Method" },
-  { to: "/settings", label: "Profile" },
-];
+/* Brand */
+.pm-navbar__brand {
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.4px;
+  color: #fff;
+  opacity: 0.9;
+  margin-bottom: 8px;
+  cursor: default;
+}
 
-export default function NavBar() {
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
+/* List reset */
+.pm-navbar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
 
-  // If the brand/whole sidebar is accidentally wrapped in <a href="/">,
-  // cancel that navigation when clicking inside the navbar.
-  const stopOuterLink = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
+/* Item + link */
+.pm-navbar__item { }
 
-  const go = (to) => (e) => {
-    // cancel any outer anchor default + bubbling
-    e.preventDefault();
-    e.stopPropagation();
-    if (to !== pathname) navigate(to);
-  };
+.pm-navbar__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 160ms ease, color 160ms ease, transform 120ms ease;
+}
 
-  return (
-    <nav className="pm-navbar" onClick={stopOuterLink} onMouseDown={stopOuterLink}>
-      <div
-        className="pm-navbar__brand"
-        role="button"
-        tabIndex={0}
-        onClick={stopOuterLink}
-        onMouseDown={stopOuterLink}
-      >
-        <span className="pm-navbar__logo">PayMeBack</span>
-      </div>
+.pm-navbar__link:hover {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  transform: translateX(2px);
+}
 
-      <ul className="pm-navbar__list">
-        {items.map((it) => {
-          const active = pathname === it.to || (it.to !== "/" && pathname.startsWith(it.to));
-          return (
-            <li key={it.to} className={"pm-navbar__item" + (active ? " pm-navbar__item--active" : "")}>
-              {/* Use a button-like div so there’s no nested <a> */}
-              <div
-                role="link"
-                tabIndex={0}
-                className={"pm-navbar__link" + (active ? " pm-navbar__link--active" : "")}
-                onClick={go(it.to)}
-                onMouseDown={stopOuterLink}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") go(it.to)(e);
-                }}
-              >
-                {it.label}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
-  );
+.pm-navbar__link--active {
+  background: linear-gradient(90deg, rgba(98,0,234,0.24), rgba(0,184,255,0.24));
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Optional thin divider under brand */
+.pm-navbar::after {
+  content: "";
+  display: block;
+  height: 1px;
+  margin: 8px 0 6px 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02));
 }
